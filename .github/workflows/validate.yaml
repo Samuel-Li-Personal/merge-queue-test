@@ -34,7 +34,7 @@ jobs:
 
   validate-merge:
     runs-on: ubuntu-latest
-    if: github.event_name == 'merge_group' && github.event.action == 'checks_requested'
+    if: github.event_name == 'merge_group' && github.event.action == 'checks_requested' && contains(github.ref_name, 'gh-readonly-queue/main/')
 
     steps:
       - name: Checkout code
