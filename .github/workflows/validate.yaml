@@ -40,7 +40,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - run: echo ${{ github.event_name }}
+      - run: |
+          echo ${{ github.event_name }}
+          echo ${{ github.event_name == 'merge_group' && github.event.action == 'checks_requested' && contains(github.ref_name, 'gh-readonly-queue/main/') && 'use-bucket' || ''}}
 
       - name: Validate Merge
         run: |
