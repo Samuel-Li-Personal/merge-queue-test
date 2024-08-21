@@ -1,0 +1,21 @@
+name: Merge Queue Validation
+
+on:
+  pull_request:
+  merge_group:
+    branches: [main]
+    types: [checks_requested]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Validate PR
+        run: |
+          # Add your validation commands here
+          # For example, you can run tests or linters
+          echo "Running tests..."
