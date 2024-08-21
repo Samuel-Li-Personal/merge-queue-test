@@ -7,6 +7,15 @@ on:
     types: [checks_requested]
 
 jobs:
+  validate-common:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - run: echo ${{ github.event_name }}
+
   validate-pr:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
