@@ -7,15 +7,34 @@ on:
     types: [checks_requested]
 
 jobs:
-  validate:
+  validate-pr:
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - run: echo ${{ github.event_name }}
+
       - name: Validate PR
         run: |
           # Add your validation commands here
           # For example, you can run tests or linters
-          echo "Running tests..."
+          echo "Validate PR..."
+
+  validate-merge:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'merge_group' && github.event.action == 'checks_requested'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - run: echo ${{ github.event_name }}
+
+      - name: Validate Merge
+        run: |
+          # Add your validation commands here
+          # For example, you can run tests or linters
+          echo "Validate Merge..."
